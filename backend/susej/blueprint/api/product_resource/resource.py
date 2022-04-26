@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import jsonify, abort
 from flask_restful import Resource, reqparse
-from sqlalchemy import table
 from susej.model.product import Product
 from susej.commands_dml import commands as database
 
