@@ -1,0 +1,5 @@
+[default]
+SQLALCHEMY_TRACK_MODIFICATIONS = false
+SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://root:root@172.17.0.2:3306/construction_product"
+TITLE = "Susej"
+JSON_SORT_KEYS = false

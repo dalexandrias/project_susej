@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">
+    Cadastrar Novo Cliente
+  </div>
+
+  <div class="card-body">
+    <div class="container-fluid">
+
+      <form class="row g-3" (ngSubmit)="eventButtonRegister(formRegister.value)" #formRegister="ngForm">
+
+        <div class="col-md-6">
+          <label for="inputName" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Nome" ngModel name="nome">
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputSobrenome" class="form-label">Sobrenome</label>
+          <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome" ngModel name="sobrenome">
+        </div>
+
+        <div class="col-md-8">
+          <label for="inputRua" class="form-label">Rua</label>
+          <input type="text" class="form-control" id="inputRua" placeholder="Rua - AV" ngModel name="rua">
+        </div>
+
+        <div class="col-md-4">
+          <label for="inputNumero" class="form-label">Numero</label>
+          <input type="text" class="form-control" id="inputNumero" placeholder="Numero" ngModel name="numero">
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputBairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="inputBairro" placeholder="Bairro - Vila" ngModel name="bairro">
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputCidade" class="form-label">Cidade</label>
+          <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ngModel name="cidade">
+        </div>
+
+        <div class="estado">
+          <label for="inputEstado" class="form-label">Estado</label>
+          <input type="text" class="form-control" id="inputEstado" placeholder="Estado" ngModel name="estado">
+        </div>
+
+        <div class="cep">
+          <label for="inputCep" class="form-label">Cep</label>
+          <input type="text" class="form-control" id="inputCep" placeholder="00000-000" ngModel name="cep">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
