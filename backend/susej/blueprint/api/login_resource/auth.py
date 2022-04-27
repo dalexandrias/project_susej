@@ -21,7 +21,7 @@ class CreateUser(Resource):
             
             user = User(**args)
 
-            return self.auth_service.save_new_user(new_user=user)
+            return self.auth_service.new_user(new_user=user)
         except Exception as error:
             return jsonify(
                 {
@@ -29,4 +29,4 @@ class CreateUser(Resource):
                     "mensage": "Error",
                     "decription": f"{error}"
                 }
-            )   
+            )
