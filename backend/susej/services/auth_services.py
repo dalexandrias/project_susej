@@ -13,7 +13,7 @@ class AuthService():
         pass
     
     def save_new_user(new_user: User) -> jsonify:
-        user = User.query.filter_by(email=new_user.email).first()
+        user = new_user.query.filter_by(email=new_user.email).first()
         if not user:
             if validators.email(new_user.email):
                 insert_table(new_user)
