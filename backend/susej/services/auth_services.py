@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import validators
 from susej.commands_dml.commands import insert_table
 
-from susej.model.login import User
+from susej.model.auth_model import User
 
 
 class AuthService():

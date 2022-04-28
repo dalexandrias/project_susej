@@ -1,10 +1,7 @@
-from flask import Blueprint, Flask
-from flask_restful import Api
-from .auth import CreateUser
+from flask import Flask
+from susej.blueprint.api.login_resource.auth_controller import bp
 
-bp = Blueprint('login', __name__, url_prefix='/api')
-api = Api(bp)
 
 def init_app(app: Flask):
-    api.add_resource(CreateUser, '/login')
+    # api.add_resource(CreateUser, '/login')
     app.register_blueprint(bp)
