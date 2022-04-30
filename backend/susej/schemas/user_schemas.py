@@ -1,8 +1,8 @@
-from flask_restx import fields
+from flask_restx import Api, fields
 
 
 class UserSchema(object):
-    def __init__(self, api) -> None:
+    def __init__(self, api: Api) -> None:
         self.api = api
 
     def new_user(self):

@@ -7,14 +7,14 @@ from susej.model.auth_model import User
 from susej.schemas.user_schemas import UserSchema
 from susej.services.auth_services import AuthService
 
-bp = Blueprint('auth', __name__, url_prefix='/api')
+bp = Blueprint('auth', __name__, url_prefix='/auth/api/v1')
 api = Api(bp, version='1.0', title='Auth API',
           description='API controle dos usuarios')
 auth_ns = api.namespace('auth', description='Autenticação dos usuarios')
 user_schemas = UserSchema(api)
 
 
-@auth_ns.route('/newuser')
+@auth_ns.route('/user')
 class CreateUser(Resource):
     def __init__(self, api=None, *args, **kwargs):
         super().__init__(api, *args, **kwargs)

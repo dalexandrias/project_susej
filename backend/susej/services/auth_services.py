@@ -1,7 +1,7 @@
 from http import HTTPStatus
+import json
 
 import validators
-from flask import jsonify
 from susej.commands_dml.commands import insert_table, update_table
 from susej.constants.status_return import (CREATED_USER, EMAIL_ALREADY_EXISTS,
                                            EMAIL_INVALID, EMAIL_NOT_REGISTER,
@@ -15,7 +15,7 @@ class AuthService():
     def __init__(self) -> None:
         pass
 
-    def save_user(self, new_user: User) -> jsonify:
+    def save_user(self, new_user: User) -> json:
         user = new_user.query.filter_by(email=new_user.email).first()
         if not user:
             if validators.email(new_user.email):
@@ -40,7 +40,7 @@ class AuthService():
                 "message": EMAIL_ALREADY_EXISTS
             }, HTTPStatus.BAD_REQUEST
 
-    def user_update(self, update_user: dict) -> User:
+    def user_update(self, update_user: dict) -> json:
         user_current = User.query.filter_by(email=update_user['email']).first()
 
         if user_current:
