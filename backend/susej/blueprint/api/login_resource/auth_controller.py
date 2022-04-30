@@ -1,55 +1,53 @@
 from http import HTTPStatus
 
-from flask import Blueprint, Flask, jsonify
-from flask_restx import Api, Resource, reqparse
-from susej.model.auth_model import User, UserSchema
+from flask import Blueprint, jsonify, request
+from flask_restx import Api, Resource
+from susej.constants.status_return import ERROR
+from susej.model.auth_model import User
+from susej.schemas.user_schemas import UserSchema
 from susej.services.auth_services import AuthService
 
 bp = Blueprint('auth', __name__, url_prefix='/api')
-api = Api(bp, version='1.0', title='Auth API', description='API controle dos usuarios')
+api = Api(bp, version='1.0', title='Auth API',
+          description='API controle dos usuarios')
 auth_ns = api.namespace('auth', description='Autenticação dos usuarios')
-user_schema = UserSchema(api).user_schema()
+user_schemas = UserSchema(api)
+
 
 @auth_ns.route('/newuser')
 class CreateUser(Resource):
     def __init__(self, api=None, *args, **kwargs):
         super().__init__(api, *args, **kwargs)
-        self.auth_service = AuthService
-        
-    # @auth_ns.route('newuser', method=['POST'])
-    @auth_ns.expect(user_schema, validate=True)
+        self.auth_service = AuthService()
+
+    @auth_ns.expect(user_schemas.new_user(), validate=True)
+    @auth_ns.marshal_with(user_schemas.out_user(), code=201, envelope='User')
     def post(self):
+        """Realiza o registro de um novo usuario
+
+        Returns:
+            Json: status, message
+        """
         try:
-            body_parse = reqparse.RequestParser()
-            body_parse.add_argument('email', type=str)
-            body_parse.add_argument('password', type=str)
-            args = body_parse.parse_args()
+            user_in = request.get_json()
+            user = User(**user_in)
 
-            user = User(**args)
-
-            return self.auth_service.new_user(new_user=user)
+            return self.auth_service.save_user(new_user=user)
         except Exception as error:
-            response = jsonify(
-                {
-                    "status": 0,
-                    "mensage": "Error",
-                    "decription": f"{error}"
-                }
-            )
-            response.status_code = HTTPStatus.BAD_REQUEST
-            return response
+            return {
+                "status": ERROR,
+                "message": f"{error}",
+            }
 
+    @auth_ns.expect(user_schemas.update_user(), validate=True)
+    @auth_ns.marshal_with(user_schemas.out_user(), code=200, envelope='User')
     def put(self):
         try:
-            ...
+            user_in = request.get_json()
 
+            return self.auth_service.user_update(update_user=user_in)
         except Exception as error:
-            response = jsonify(
-                {
-                    "status": 0,
-                    "mensage": "Error",
-                    "decription": f"{error}"
-                }
-            )
-            response.status_code = HTTPStatus.BAD_REQUEST
-            return response
+            return {
+                "status": ERROR,
+                "message": f"{error}"
+            }

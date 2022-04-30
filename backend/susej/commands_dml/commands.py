@@ -18,3 +18,7 @@ def delete_table(all=False, **args) -> None:
     
     db.session.commit()
     db.session.close()
+    
+def update_table() -> None:
+    db.session.commit()
+    db.session.close()
