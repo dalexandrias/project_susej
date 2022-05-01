@@ -24,10 +24,11 @@ class CreateClient(Resource):
         
         client = Client(**client_in)
         
-        return self.client_service.client_save(client)
+        return self.client_service.save_client(client)
 
+    @client_ns.marshal_list_with(client_schemas.new_client(), code=200, envelope='Client')
     def get(self):
-        ...
+        return self.client_service.get_all_client()
         
     def put(self):
         ...

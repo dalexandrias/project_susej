@@ -12,9 +12,10 @@ dynaconf==3.1.7
 filelock==3.6.0
 Flask==2.1.1
 Flask-Migrate==3.1.0
-flask-restplus==0.13.0
+flask-restx==0.5.1
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
+gunicorn==20.1.0
 idna==3.3
 importlib-metadata==4.11.3
 importlib-resources==5.7.1

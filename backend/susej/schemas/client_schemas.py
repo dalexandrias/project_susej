@@ -8,6 +8,7 @@ class ClientSchemas(object):
     def new_client(self):
         return self.api.model(
             'Client', {
+                "id": fields.Integer(description='ID do cliente'),
                 "nome": fields.String(description='Nome do Cliente', required=True),
                 "sobrenome": fields.String(description='sobrenome do Cliente', required=True),
                 "rua": fields.String(description='rua do Cliente', required=True),
